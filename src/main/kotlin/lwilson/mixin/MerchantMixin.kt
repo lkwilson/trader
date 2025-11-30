@@ -13,8 +13,8 @@ abstract class MerchantMixin {
   private val logger = LoggerFactory.getLogger("trader.merchant")
 
   @Inject(method = ["fillRecipesFromPool"], at = arrayOf(At("TAIL")))
-  private fun onSetOffersFromServer(info: CallbackInfo) {
-    logger.info("onSetOffersFromServer")
+  private fun onFillRecipesFromPool(info: CallbackInfo) {
+    logger.info("fillRecipesFromPool")
     val merchant = this as MerchantEntity
     // if (merchant is VillagerEntity) {
     //     val world = merchant.world ?: return
