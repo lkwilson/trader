@@ -1,6 +1,7 @@
-package lwilson.mixin
+package lwilson.mixin.client
 
 import lwilson.TradeSync
+import lwilson.Config
 import net.minecraft.client.MinecraftClient
 import net.minecraft.screen.MerchantScreenHandler
 import net.minecraft.village.TradeOfferList
@@ -16,6 +17,7 @@ abstract class MerchantScreenHandlerMixin {
 
   @Inject(method = ["setOffers"], at = arrayOf(At("TAIL")))
   private fun onSetOffers(offers: TradeOfferList, info: CallbackInfo) {
+    if (!Config.modEnabled) return
     if (!TradeSync.pending) return
     val client = MinecraftClient.getInstance()
     if (client.isInSingleplayer()) return
@@ -32,7 +34,7 @@ abstract class MerchantScreenHandlerMixin {
     // This seems to close / set null and send the packet
     player.closeHandledScreen()
 
-    logger.info("Setting pending to false")
+    logger.debug("Setting pending to false")
     TradeSync.pending = false
   }
 }

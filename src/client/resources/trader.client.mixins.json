@@ -3,7 +3,8 @@
 	"package": "lwilson.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+    "VillagerMixin",
+    "MerchantScreenHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
