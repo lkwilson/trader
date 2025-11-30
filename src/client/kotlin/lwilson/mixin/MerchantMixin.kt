@@ -14,9 +14,8 @@ import net.minecraft.client.MinecraftClient
 abstract class MerchantMixin {
   private val logger = LoggerFactory.getLogger("trader.merchant")
 
-  @Inject(method = ["fillRecipesFromPool"], at = arrayOf(At("TAIL")))
-  private fun onFillRecipesFromPool(info: CallbackInfo) {
-    logger.info("fillRecipesFromPool")
+  private fun handleUpdate() {
+    logger.info("Villager trades updated!")
     val merchant = this as MerchantEntity
     if (!(merchant is VillagerEntity)) return
     val msg = Text.literal("Villager updated:");
@@ -27,5 +26,17 @@ abstract class MerchantMixin {
     val client = MinecraftClient.getInstance()
     val player = client.player ?: return
     player.sendMessage(msg, false);
+  }
+
+  @Inject(method = ["setOffersFromServer"], at = arrayOf(At("TAIL")))
+  private fun onSetOffersFromServer(info: CallbackInfo) {
+    logger.info("setOffersFromServer")
+    handleUpdate()
+  }
+
+  @Inject(method = ["fillRecipesFromPool"], at = arrayOf(At("TAIL")))
+  private fun onFillRecipesFromPool(info: CallbackInfo) {
+    logger.info("fillRecipesFromPool")
+    handleUpdate()
   }
 }
