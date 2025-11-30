@@ -21,7 +21,17 @@ abstract class MerchantScreenHandlerMixin {
     if (client.isInSingleplayer()) return
     val player = client.player ?: return
     TradeSync.handleOffers(client, player, offers)
-    client.setScreen(null)
+    // This alone has the issue of the server not realizing it's closed, so we
+    // have to send the packet
+    // client.networkHandler?.sendPacket(CloseHandledScreenC2SPacket(player.currentScreenHandler.syncId))
+    // client.setScreen(null);
+
+    // This has the issue of the server not realizing it's closed
+    // player.closeScreen()
+
+    // This seems to close / set null and send the packet
+    player.closeHandledScreen()
+
     logger.info("Setting pending to false")
     TradeSync.pending = false
   }
