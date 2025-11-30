@@ -6,6 +6,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket
 import net.minecraft.registry.RegistryKey
+import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.village.VillagerProfession
 import org.slf4j.LoggerFactory
@@ -26,6 +27,12 @@ abstract class VillagerMixin {
       TradeSync.handleOffers(client, player, villager.offers)
     } else if (!client.isInSingleplayer()) {
       // todo: can player reach?
+      if (client.currentScreen != null) {
+        client.execute {
+          player.sendMessage(Text.literal("Unable to open villager trading window"), false)
+        }
+        return
+      }
       logger.info("Setting pending to true")
       TradeSync.pending = true
       client.networkHandler?.sendPacket(
