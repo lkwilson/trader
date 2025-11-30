@@ -1,16 +1,14 @@
 {
-	"required": true,
-	"package": "lwilson.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"MerchantMixin",
-		"VillagerMixin",
-    "MerchantScreenHandlerMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	}
+  "required": true,
+  "package": "lwilson.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "VillagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }
