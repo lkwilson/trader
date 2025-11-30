@@ -19,9 +19,9 @@ abstract class MerchantMixin {
     val merchant = this as MerchantEntity
     if (!(merchant is VillagerEntity)) return
     val msg = Text.literal("Villager updated:");
-    for (x in merchant.offers) {
-      msg.append("\n  - ${x.sellItem}")
-    }
+    // for (x in merchant.offers) {
+    //   msg.append("\n  - ${x.sellItem}")
+    // }
 
     val client = MinecraftClient.getInstance()
     val player = client.player ?: return

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 
 @Mixin(VillagerEntity::class)
 abstract class ServerVillagerMixin {
-  private val logger = LoggerFactory.getLogger("trader.svr.villager")
+  private val logger = LoggerFactory.getLogger("trader.svr_villager")
 
   private fun handleUpdate() {
     val villager = this as VillagerEntity

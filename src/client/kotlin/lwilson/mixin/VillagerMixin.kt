@@ -14,9 +14,20 @@ abstract class VillagerMixin {
   private fun handleUpdate() {
     val villager = this as VillagerEntity
     logger.info("Villager trades updated!")
-    for (x in villager.offers) {
-      logger.info("Offer: ${x.sellItem} ${x.sellItem.enchantments.toString()}")
+    try {
+        val offers = villager.offers ?: return
+        for (x in offers) {
+          logger.info("Offer: ${x.sellItem} ${x.sellItem.enchantments.toString()}")
+        }
+    } catch (e: Exception) {
+        logger.info("Offers not yet loaded on client")
     }
+  }
+
+  @Inject(method = ["setVillagerData"], at = arrayOf(At("HEAD")))
+  private fun onSetVillagerData(info: CallbackInfo) {
+    logger.info("setVillagerData")
+    handleUpdate()
   }
 
   @Inject(method = ["setOffers"], at = arrayOf(At("HEAD")))

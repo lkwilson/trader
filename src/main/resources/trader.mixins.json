@@ -5,8 +5,7 @@
 	"mixins": [
 		"MerchantMixin",
 		"VillagerMixin",
-		"ServerMerchantMixin",
-		"ServerVillagerMixin"
+    "MerchantScreenHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

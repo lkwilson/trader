@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 
 @Mixin(MerchantEntity::class)
 abstract class ServerMerchantMixin {
-  private val logger = LoggerFactory.getLogger("trader.svr.merchant")
+  private val logger = LoggerFactory.getLogger("trader.svr_merchant")
 
   private fun handleUpdate() {
     logger.info("Villager trades updated!")
