@@ -3,7 +3,8 @@
 	"package": "lwilson.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"VillagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
