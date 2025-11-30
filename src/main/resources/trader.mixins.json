@@ -3,7 +3,8 @@
   "package": "lwilson.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "VillagerMixin"
+    "VillagerMixin",
+    "MerchantScreenHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

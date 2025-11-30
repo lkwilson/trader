@@ -1,19 +1,18 @@
 package lwilson.mixin
 
 import java.util.UUID
+import lwilson.TradeSync
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.passive.VillagerEntity
+import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket
 import net.minecraft.registry.RegistryKey
-import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.village.VillagerProfession
-import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.enchantment.Enchantment
 import org.slf4j.LoggerFactory
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
 import org.spongepowered.asm.mixin.injection.Inject
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
-import kotlin.jvm.optionals.getOrDefault
 
 @Mixin(VillagerEntity::class)
 abstract class VillagerMixin {
@@ -22,25 +21,16 @@ abstract class VillagerMixin {
 
   private fun handleJobChange(villager: VillagerEntity) {
     val client = MinecraftClient.getInstance()
+    val player = client.player ?: return
     if (!villager.entityWorld.isClient) {
-      val player = client.player ?: return
-      for (offer in villager.offers) {
-        val enchs = EnchantmentHelper.getEnchantments(offer.sellItem)
-        for (ench in enchs.enchantments) {
-          val enchv = ench.value()
-          val level = enchs.getLevel(ench)
-          val cost = offer.firstBuyItem.count()
-          val name = enchv.toString().replaceFirst("Enchantment ", "")
-          val max_level = enchv.maxLevel
-          val msg = "$name $level (max: $max_level) FOR $cost"
-          // logger.info(msg)
-          player.sendMessage(Text.literal(msg), true)
-          return
-        }
-      }
-      player.sendMessage(Text.literal("Enchantment None"), true)
+      TradeSync.handleOffers(client, player, villager.offers)
     } else if (!client.isInSingleplayer()) {
-      logger.info("In server world. Need to request offers from server")
+      // todo: can player reach?
+      logger.info("Setting pending to true")
+      TradeSync.pending = true
+      client.networkHandler?.sendPacket(
+              PlayerInteractEntityC2SPacket.interact(villager, player.isSneaking, Hand.MAIN_HAND)
+      )
     }
   }
 
