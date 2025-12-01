@@ -3,7 +3,7 @@
   "id": "trader",
   "version": "${version}",
   "name": "trader",
-  "description": "Sends messages with new librarian villager trades",
+  "description": "Sends messages with new librarian villager trades. Note that in multiplayer, this mod rapidly opens and closes the villager trading window which requires that the player be stationary and not sneaking. This also means it could be detected by anti-cheat engines. These checks can be disabled in settings.",
   "authors": [
     "lkwilson"
   ],

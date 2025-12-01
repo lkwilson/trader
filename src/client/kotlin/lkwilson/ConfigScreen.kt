@@ -13,7 +13,9 @@ fun createConfigScreen(parent: Screen?): Screen {
 
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
-                  .startBooleanToggle(Text.literal("Enable the Trader mod"), Config.modEnabled)
+                  .startBooleanToggle(Text.literal("Enable"), Config.modEnabled)
+                  .setTooltip(Text.literal("Enable or disable the mod"))
+                  .setDefaultValue(true)
                   .setSaveConsumer {
                     Config.modEnabled = it
                     Config.save()
@@ -24,9 +26,13 @@ fun createConfigScreen(parent: Screen?): Screen {
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
                   .startBooleanToggle(
-                          Text.literal("Send trade details to chat instead of an overlay popup"),
+                          Text.literal("Use chat instead of overlay"),
                           Config.messageWithChat
                   )
+                  .setTooltip(
+                          Text.literal("Send trade details to chat instead of an overlay popup")
+                  )
+                  .setDefaultValue(true)
                   .setSaveConsumer {
                     Config.messageWithChat = it
                     Config.save()
@@ -37,9 +43,15 @@ fun createConfigScreen(parent: Screen?): Screen {
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
                   .startBooleanToggle(
-                          Text.literal("Require line of site (server only)"),
+                          Text.literal("(multiplayer) Require line of site"),
                           Config.requireLineOfSight
                   )
+                  .setTooltip(
+                          Text.literal(
+                                  "The player must have line of site to the villager (ignored in single player)"
+                          )
+                  )
+                  .setDefaultValue(true)
                   .setSaveConsumer {
                     Config.requireLineOfSight = it
                     Config.save()
@@ -50,11 +62,15 @@ fun createConfigScreen(parent: Screen?): Screen {
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
                   .startBooleanToggle(
-                          Text.literal(
-                                  "Require player to be stationary as requesting villager trades will cancel movement"
-                          ),
+                          Text.literal("(multiplayer) Require stationary"),
                           Config.requirePlayerStationary
                   )
+                  .setTooltip(
+                          Text.literal(
+                                  "The player must not be moving since requesting villager trades will cancel movement (ignored in single player)"
+                          )
+                  )
+                  .setDefaultValue(true)
                   .setSaveConsumer {
                     Config.requirePlayerStationary = it
                     Config.save()
@@ -65,11 +81,15 @@ fun createConfigScreen(parent: Screen?): Screen {
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
                   .startBooleanToggle(
-                          Text.literal(
-                                  "Require player to not be sneaking as requesting villager trades will cancel sneak"
-                          ),
+                          Text.literal("(multiplayer) Require standing"),
                           Config.requirePlayerNotSneaking
                   )
+                  .setTooltip(
+                          Text.literal(
+                                  "The player must not be sneaking since requesting villager trades will cancel sneak (ignored in single player)"
+                          )
+                  )
+                  .setDefaultValue(true)
                   .setSaveConsumer {
                     Config.requirePlayerNotSneaking = it
                     Config.save()
