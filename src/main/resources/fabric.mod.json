@@ -18,12 +18,6 @@
     "modmenu": [
       "lkwilson.ModMenuIntegration"
     ],
-    "main": [
-      {
-        "value": "lkwilson.Trader",
-        "adapter": "kotlin"
-      }
-    ],
     "client": [
       {
         "value": "lkwilson.TraderClient",
