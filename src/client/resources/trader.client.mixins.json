@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "lwilson.mixin.client",
+	"package": "lkwilson.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
     "VillagerMixin",

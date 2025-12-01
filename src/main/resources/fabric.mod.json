@@ -17,13 +17,13 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "lwilson.Trader",
+        "value": "lkwilson.Trader",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "lwilson.TraderClient",
+        "value": "lkwilson.TraderClient",
 				"adapter": "kotlin"
 			}
 		]

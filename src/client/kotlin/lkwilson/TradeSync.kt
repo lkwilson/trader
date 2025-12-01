@@ -1,4 +1,4 @@
-package lwilson
+package lkwilson
 
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayerEntity
@@ -12,7 +12,6 @@ object TradeSync {
   var pending = false
 
   fun handleOffers(client: MinecraftClient, player: ClientPlayerEntity, offers: TradeOfferList) {
-    val overlay = false
     for (offer in offers) {
       val enchs = EnchantmentHelper.getEnchantments(offer.sellItem)
       for (ench in enchs.enchantments) {
@@ -23,10 +22,10 @@ object TradeSync {
         val max_level = enchv.maxLevel
         val msg = "$name $level/${max_level} @ $cost"
         logger.info(msg)
-        client.execute { player.sendMessage(Text.literal(msg), overlay) }
+        client.execute { player.sendMessage(Text.literal(msg), !Config.messageWithChat) }
         return
       }
     }
-    client.execute { player.sendMessage(Text.literal("None"), overlay) }
+    client.execute { player.sendMessage(Text.literal("None"), !Config.messageWithChat) }
   }
 }

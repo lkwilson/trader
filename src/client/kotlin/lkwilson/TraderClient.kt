@@ -1,4 +1,4 @@
-package lwilson
+package lkwilson
 
 import net.fabricmc.api.ClientModInitializer
 

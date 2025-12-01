@@ -1,4 +1,4 @@
-package lwilson
+package lkwilson
 
 import net.fabricmc.api.ModInitializer
 import org.slf4j.LoggerFactory

@@ -1,7 +1,7 @@
-package lwilson.mixin.client
+package lkwilson.mixin.client
 
-import lwilson.TradeSync
-import lwilson.Config
+import lkwilson.TradeSync
+import lkwilson.Config
 import net.minecraft.client.MinecraftClient
 import net.minecraft.screen.MerchantScreenHandler
 import net.minecraft.village.TradeOfferList

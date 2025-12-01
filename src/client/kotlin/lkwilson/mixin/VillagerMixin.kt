@@ -1,8 +1,8 @@
-package lwilson.mixin.client
+package lkwilson.mixin.client
 
 import java.util.UUID
-import lwilson.Config
-import lwilson.TradeSync
+import lkwilson.Config
+import lkwilson.TradeSync
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket
@@ -26,7 +26,10 @@ abstract class VillagerMixin {
     val player = client.player ?: return
     if (player.squaredDistanceTo(villager) > 4.5 * 4.5) {
       client.execute {
-        player.sendMessage(Text.literal("Can't get trade: villager too far from player"), false)
+        player.sendMessage(
+                Text.literal("Can't get trade: villager too far from player"),
+                !Config.messageWithChat
+        )
       }
     } else if (!villager.entityWorld.isClient) {
       TradeSync.handleOffers(client, player, villager.offers)
@@ -34,27 +37,30 @@ abstract class VillagerMixin {
       val xz_speed_proxy = Math.abs(player.velocity.x) + Math.abs(player.velocity.z)
       if (client.currentScreen != null) {
         client.execute {
-          player.sendMessage(Text.literal("Can't get trade: player has a window open"), false)
+          player.sendMessage(
+                  Text.literal("Can't get trade: player has a window open"),
+                  !Config.messageWithChat
+          )
         }
       } else if (Config.requirePlayerStationary && xz_speed_proxy > 0.001) {
         client.execute {
           player.sendMessage(
                   Text.literal("Can't get trade: getting trades would stop player movement"),
-                  false
+                  !Config.messageWithChat
           )
         }
       } else if (Config.requireLineOfSight && !player.canSee(villager)) {
         client.execute {
           player.sendMessage(
                   Text.literal("Can't get trade: player can't see villager center"),
-                  false
+                  !Config.messageWithChat
           )
         }
       } else if (Config.requirePlayerNotSneaking && player.isSneaking) {
         client.execute {
           player.sendMessage(
                   Text.literal("Can't get trade: getting trades would take player out of sneak"),
-                  false
+                  !Config.messageWithChat
           )
         }
       } else {
