@@ -1,48 +1,51 @@
 {
-	"schemaVersion": 1,
-	"id": "trader",
-	"version": "${version}",
-	"name": "trader",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/trader/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			{
+  "schemaVersion": 1,
+  "id": "trader",
+  "version": "${version}",
+  "name": "trader",
+  "description": "Sends messages with new librarian villager trades",
+  "authors": [
+    "lkwilson"
+  ],
+  "contact": {
+    "homepage": "https://github.com/lkwilson/trader",
+    "sources": "https://github.com/lkwilson/trader"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/trader/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "modmenu": [
+      "lkwilson.ModMenuIntegration"
+    ],
+    "main": [
+      {
         "value": "lkwilson.Trader",
-				"adapter": "kotlin"
-			}
-		],
-		"client": [
-			{
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
         "value": "lkwilson.TraderClient",
-				"adapter": "kotlin"
-			}
-		]
-	},
-	"mixins": [
-		"trader.mixins.json",
-		{
-			"config": "trader.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.18.1",
-		"minecraft": "~1.21.9",
-		"java": ">=21",
-		"fabric-api": "*",
-		"fabric-language-kotlin": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "trader.mixins.json",
+    {
+      "config": "trader.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "~1.21.9",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }

@@ -21,6 +21,10 @@ repositories {
       name = "Shedaniel"
       url = "https://maven.shedaniel.me/"
   }
+  maven {
+      name = "TerraformersMC"
+      url = "https://maven.terraformersmc.com/"
+  }
 }
 
 loom {
@@ -46,7 +50,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
   // Mod Menu
-	modImplementation "me.shedaniel.cloth:cloth-config-fabric:20.0.149"
+	modCompileOnly "me.shedaniel.cloth:cloth-config-fabric:20.0.149"
+  modCompileOnly "com.terraformersmc:modmenu:16.0.0-rc.1"
 }
 
 processResources {

@@ -23,7 +23,10 @@ fun createConfigScreen(parent: Screen?): Screen {
 
   general.addEntry(
           me.shedaniel.clothconfig2.api.ConfigEntryBuilder.create()
-                  .startBooleanToggle(Text.literal("Send trade details to chat instead of an overlay popup"), Config.messageWithChat)
+                  .startBooleanToggle(
+                          Text.literal("Send trade details to chat instead of an overlay popup"),
+                          Config.messageWithChat
+                  )
                   .setSaveConsumer {
                     Config.messageWithChat = it
                     Config.save()
